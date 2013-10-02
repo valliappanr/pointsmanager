@@ -1,8 +1,8 @@
 package pointsmanager.dao;
 
-import pointsmanager.entitystore.CategoryEvent;
-import pointsmanager.entitystore.CategoryRowKey;
+import pointsmanager.entitystore.ProductCategoryEvent;
+import pointsmanager.entitystore.ProductCategoryRowKey;
 
-public interface CategoryDao extends CFDao<CategoryRowKey, CategoryEvent>{
+public interface CategoryDao extends CFDao<ProductCategoryRowKey, ProductCategoryEvent>{
 
 }

@@ -17,6 +17,10 @@ import com.netflix.astyanax.model.ColumnFamily;
 import com.netflix.astyanax.model.ColumnList;
 
 
+/**
+ * Base class DAO implementation to access the column family.
+ * 
+ */
 public class CFDaoImpl<K, C> implements CFDao<K, C> {
 
 	@Autowired
@@ -53,6 +57,13 @@ public class CFDaoImpl<K, C> implements CFDao<K, C> {
 	}
 	
 
+	/**
+	 * Puts an entity into the repository
+	 *  
+	 * @param key - row key of the entity
+	 * @param column - Column of the entity
+	 * @param value - value of the entity
+	 */
 	@Override
 	public <V> void put(K key, C column, V value) {
 		MutationBatch mutation = cfContext.getKeyspace().prepareMutationBatch();
@@ -67,12 +78,18 @@ public class CFDaoImpl<K, C> implements CFDao<K, C> {
 		try {
 			mutation.execute();
 		} catch (ConnectionException e) {
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 
+	/**
+	 * Retrives the column values of a matching row key
+	 *  
+	 * @param key - row key of the entity
+	 * @return value list- list of values of matching row key.
+	 */
 	@Override
-	public <V> List<V> get(K key, C column) {
+	public <V> List<V> get(K key) {
 		List<V> resultList = new ArrayList<V>();
 		try {
 			ColumnList<C> cl1 = cfContext.getKeyspace().prepareQuery(comlumFamily).getKey(key).execute().getResult();

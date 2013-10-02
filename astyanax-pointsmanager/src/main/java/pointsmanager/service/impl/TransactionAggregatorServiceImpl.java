@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import pointsmanager.dao.MonthlyTransactionDao;
 import pointsmanager.dao.TransactionDao;
 import pointsmanager.entitystore.MonthlyTransactionRowKey;
-import pointsmanager.entitystore.TransactionEvent;
 import pointsmanager.entitystore.TransactionRowKey;
 import pointsmanager.service.TransactionAggregatorService;
 
@@ -30,26 +29,34 @@ public class TransactionAggregatorServiceImpl implements TransactionAggregatorSe
 	private static final DateTimeFormatter MONTH_YEAR_FORMATTER = DateTimeFormat.forPattern("MM-yyyy");
 	
 	@Override
-	public Integer findAmountForMember(String memberId, LocalDateTime date) {
+	public Integer calculateAggregatedPointsUptoDate(String memberId, LocalDateTime date) {
+		int pointsTillYesterday = getPointsTillDayBefore(memberId, date);
+		int pointsForToday = getPointsFortheDay(memberId, date);
+		return pointsTillYesterday + pointsForToday;
+	}
+	
+	Integer getPointsFortheDay(String memberId, LocalDateTime date) {
 		LocalDate localDate = LocalDate.parse(date.toString(DATE_FORMATTER));
-		TransactionRowKey rowKey = createTransactionRowKey(memberId, localDate.toDate());
-		TransactionEvent origEntity = createTransactionEntity(localDate, memberId, date);
+		TransactionRowKey transactionKey = createTransactionRowKey(memberId, localDate.toDate());
+		int pointsForToday = 0;
+		List<Integer> currentDayTransactionValue = transactionDao.get(transactionKey);
+		for (Integer value : currentDayTransactionValue) {
+			pointsForToday += value;
+		}
+		return pointsForToday;
 		
+	}
+	
+	Integer getPointsTillDayBefore(String memberId, LocalDateTime date) {
 		MonthlyTransactionRowKey key = new MonthlyTransactionRowKey();
 		key.setMemberId(memberId);
 		key.setMonthAndYear(date.toString(MONTH_YEAR_FORMATTER));
-
-	    List<Integer> monthlyTransactionValues = monthlyTransactionDao.get(key, memberId);
+	    List<Integer> monthlyTransactionValues = monthlyTransactionDao.get(key);
 	    int monthlyTotal = 0;
 		for (Integer value : monthlyTransactionValues) {
 			monthlyTotal += value;
 		}
-		int dayTotal = 0;
-		List<Integer> currentDayTransactionValue = transactionDao.get(rowKey, origEntity);
-		for (Integer value : currentDayTransactionValue) {
-			dayTotal += value;
-		}
-		return monthlyTotal + dayTotal;
+		return monthlyTotal;
 	}
 	
 	private TransactionRowKey createTransactionRowKey(String memberId, Date date) {
@@ -58,14 +65,4 @@ public class TransactionAggregatorServiceImpl implements TransactionAggregatorSe
 		rowKey.setDate(date);
 		return rowKey;
 	}
-	
-	private TransactionEvent createTransactionEntity(LocalDate localDate, String memberId,
-			LocalDateTime dateTime) {
-		TransactionEvent transactionEvent = new TransactionEvent();
-		transactionEvent.setMemberId(memberId);
-		transactionEvent.setTimeStamp(dateTime.toDate());
-		return transactionEvent;
-	}
-	
-
 }

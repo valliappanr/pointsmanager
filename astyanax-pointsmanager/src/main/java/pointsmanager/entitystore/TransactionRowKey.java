@@ -5,6 +5,12 @@ import java.util.Date;
 import com.netflix.astyanax.annotations.Component;
 import com.netflix.astyanax.serializers.AnnotatedCompositeSerializer;
 
+/**
+ * Pojo Mapping Row Key of transaction column family.
+ * 
+ * Row key is mapped to memberId : <date>
+ * 
+ */
 public class TransactionRowKey  {
 	
 	@Component(ordinal=0) private String memberId;

@@ -26,17 +26,17 @@ public class TransactionServiceImpl implements TransactionService {
 	public void addTransactionForMember(String memberId, Integer points, LocalDateTime date) {
 		LocalDate localDate = LocalDate.parse(date.toString(DATE_FORMATTER));
 		TransactionRowKey rowKey = createTransactionRowKey(memberId, localDate.toDate());
-		TransactionEvent origEntity = createTransactionEntity(localDate, memberId, date);
-		transactionDao.put(rowKey, origEntity, points);
+		TransactionEvent transactionEvent = createTransactionEvent(localDate, memberId, date);
+		transactionDao.put(rowKey, transactionEvent, points);
 	}
 	
 	@Override
 	public void deductPoints(String memberId, Integer points, LocalDateTime date) {
 		LocalDate localDate = LocalDate.parse(date.toString(DATE_FORMATTER));
 		TransactionRowKey rowKey = createTransactionRowKey(memberId, localDate.toDate());
-		TransactionEvent origEntity = createTransactionEntity(localDate, memberId, date);
+		TransactionEvent origEntity = createTransactionEvent(localDate, memberId, date);
 		transactionDao.put(rowKey, origEntity, -points);
-	}	
+	}
 
 	private TransactionRowKey createTransactionRowKey(String memberId, Date date) {
 		TransactionRowKey rowKey = new TransactionRowKey();
@@ -45,12 +45,11 @@ public class TransactionServiceImpl implements TransactionService {
 		return rowKey;
 	}
 	
-	private TransactionEvent createTransactionEntity(LocalDate localDate, String memberId,
+	private TransactionEvent createTransactionEvent(LocalDate localDate, String memberId,
 			LocalDateTime dateTime) {
 		TransactionEvent transactionEvent = new TransactionEvent();
 		transactionEvent.setMemberId(memberId);
 		transactionEvent.setTimeStamp(dateTime.toDate());
 		return transactionEvent;
 	}
-
 }

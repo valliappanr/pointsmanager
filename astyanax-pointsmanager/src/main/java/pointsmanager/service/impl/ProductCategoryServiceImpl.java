@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pointsmanager.dao.CategoryDao;
-import pointsmanager.entitystore.CategoryEvent;
-import pointsmanager.entitystore.CategoryRowKey;
+import pointsmanager.entitystore.ProductCategoryEvent;
+import pointsmanager.entitystore.ProductCategoryRowKey;
 import pointsmanager.service.ProductCategoryService;
 
 @Service
@@ -26,21 +26,21 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 	public void updateProductCategoryForMember(String memberId,
 			String categoryId, Integer points, LocalDateTime date) {
 		LocalDate localDate = LocalDate.parse(date.toString(DATE_FORMATTER));
-		CategoryRowKey rowKey = createCategoryRowKey(categoryId, localDate.toDate());
-		CategoryEvent event = createCategoryEvent(memberId, date.toDate());
+		ProductCategoryRowKey rowKey = createCategoryRowKey(categoryId, localDate.toDate());
+		ProductCategoryEvent event = createCategoryEvent(memberId, date.toDate());
 		categoryDao.put(rowKey,  event, points);
 	}
 	
-	private CategoryEvent createCategoryEvent(String memberId, Date date) {
-		CategoryEvent categoryEvent = new CategoryEvent();
+	private ProductCategoryEvent createCategoryEvent(String memberId, Date date) {
+		ProductCategoryEvent categoryEvent = new ProductCategoryEvent();
 		categoryEvent.setMemberId(memberId);
 		categoryEvent.setDate(date);
 		return categoryEvent;
 		
 	}
 	
-	private CategoryRowKey createCategoryRowKey(String categoryId, Date date) {
-		CategoryRowKey categoryRowKey = new CategoryRowKey();
+	private ProductCategoryRowKey createCategoryRowKey(String categoryId, Date date) {
+		ProductCategoryRowKey categoryRowKey = new ProductCategoryRowKey();
 		categoryRowKey.setCategoryId(categoryId);
 		categoryRowKey.setDate(date);
 		return categoryRowKey;

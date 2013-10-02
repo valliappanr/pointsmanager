@@ -3,12 +3,15 @@ package pointsmanager.entitystore;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-
 import com.netflix.astyanax.annotations.Component;
 import com.netflix.astyanax.serializers.AnnotatedCompositeSerializer;
 
-@Entity
+/**
+ * Pojo Mapping Composite column name mapping for transaction column family.
+ * 
+ * Row key is mapped to memberId : timestamp
+ * 
+ */
 public class TransactionEvent {
 	
 	@Component(ordinal=0) String memberId;       // This will be the first part of the composite

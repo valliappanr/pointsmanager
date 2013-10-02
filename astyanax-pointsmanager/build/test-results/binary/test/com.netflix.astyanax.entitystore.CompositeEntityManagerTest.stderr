@@ -1,5 +1,0 @@
-log4j:WARN No appenders could be found for logger (com.netflix.astyanax.test.EmbeddedCassandra).
-log4j:WARN Please initialize the log4j system properly.
-log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
-/127.0.0.1:7000 is in use by another process.  Change listen_address:storage_port in cassandra.yaml to values that do not conflict with other services
-Fatal configuration error; unable to start server.  See log for stacktrace.

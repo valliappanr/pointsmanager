@@ -4,6 +4,6 @@ import org.joda.time.LocalDateTime;
 
 public interface TransactionAggregatorService {
 
-	Integer findAmountForMember(String memberId, LocalDateTime localDate);
+	Integer calculateAggregatedPointsUptoDate(String memberId, LocalDateTime localDate);
 
 }

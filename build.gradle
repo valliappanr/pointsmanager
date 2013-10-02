@@ -59,7 +59,8 @@ subprojects {
         compile  "org.springframework:spring-aop:$springVersion"
         compile  "org.springframework:spring-test:$springVersion"
     	compile  "javax.persistence:persistence-api:$jpaVersion"
-        testCompile "stax:stax-api:1.0"
+        testCompile "org.mockito:mockito-all:1.8.4"
+	testCompile "stax:stax-api:1.0"
         testCompile "junit:junit:$junitVersion"
     }
 }

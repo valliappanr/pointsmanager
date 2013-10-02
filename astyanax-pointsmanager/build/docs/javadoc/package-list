@@ -1,6 +1,0 @@
-pointsmanager.context
-pointsmanager.dao
-pointsmanager.dao.impl
-pointsmanager.entitystore
-pointsmanager.service
-pointsmanager.service.impl
