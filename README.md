@@ -17,26 +17,26 @@ The cassandra Column family structures are below,
 	Column Family - transaction - dynamic column family
 
 	|-------------------------------------------------
-	| Row			| column name: timestamp |
-	| memberId:<date>	| value:  <points>	 |
-	|			|			 |
+	| Row                   | column name: timestamp |
+	| memberId:<date>       | value:  <points>       |
+	|                       |                        |
 	|------------------------------------------------
 
 
 	Column Family - product_category - dynamic column family
 
 	|----------------------------------------------------------------
-	| Row			| column name: Composite<memberId:date> |
-	| categoryId:<date>	| value:  <points>	                |
-	|			|			                |
+	| Row                   | column name: Composite<memberId:date> |
+	| categoryId:<date>     | value:  <points>                      |
+	|                       |                                       |
 	|----------------------------------------------------------------
 
 	Column Family - monthly_txn - CounterType column
 
 	|------------------------------------------------------------------|
-	| Row			| column name: sum 			   |
-	| memberId:<month-year>	| value: <Sum accumulated for the current  |
-	|			|	  month.		           |
+	| Row                   | column name: sum                         |
+	| memberId:<month-year> | value: <Sum accumulated for the current  |
+	|                       | month.                                   |
 	|------------------------------------------------------------------|
 
 
