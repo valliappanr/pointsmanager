@@ -1,0 +1,74 @@
+// Establish version and status
+//ext.githubProjectName = rootProject.name // Change if github project name is not the same as the root project's name
+
+ext.githubProjectName = rootProject.name
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+allprojects {
+    repositories { 
+        mavenLocal()
+        mavenCentral()
+	maven { url 'http://repo.springsource.org/release' }
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'osgi'
+
+apply from: file('gradle/convention.gradle')
+apply from: file('gradle/maven.gradle')
+apply from: file('gradle/dependency-versions.gradle')
+
+
+subprojects {
+    group = "astyanax-pointsmanager"
+
+    apply plugin: 'eclipse'
+
+    dependencies {
+        compile "joda-time:joda-time:$jodaTimeVersion"
+        compile "com.github.stephenc.high-scale-lib:high-scale-lib:$highScaleLibVersion"
+        compile "com.google.guava:guava:$guavaVersion"
+        compile "com.eaio.uuid:uuid:$uuidVersion"
+        compile "org.slf4j:slf4j-api:$slf4jVersion"
+        compile "org.codehaus.jettison:jettison:$jettisonVersion"
+        compile "commons-codec:commons-codec:$commonsCodecVersion"
+        compile "commons-lang:commons-lang:$commonsLangVersion"
+        compile "com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:$concurrentLinkedHashMapVersion"
+        compile "org.codehaus.jackson:jackson-core-asl:$jacksonVersion"
+        compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
+        compile "org.xerial.snappy:snappy-java:$snappyVersion"
+        compile  "com.netflix.astyanax:astyanax-core:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-cassandra:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-recipes:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-thrift:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-entity-mapper:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-queue:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-examples:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-contrib:1.56.43"
+        compile  "com.netflix.astyanax:astyanax-test:1.56.31"
+        compile  "org.springframework:spring-core:$springVersion"
+        compile  "org.springframework:spring-context:$springVersion"
+        compile  "org.springframework:spring-beans:$springVersion"
+        compile  "org.springframework:spring-aop:$springVersion"
+        compile  "org.springframework:spring-test:$springVersion"
+    	compile  "javax.persistence:persistence-api:$jpaVersion"
+        testCompile "stax:stax-api:1.0"
+        testCompile "junit:junit:$junitVersion"
+    }
+}
+
+project(':astyanax-pointsmanager') {
+    apply plugin: 'java'
+    dependencies {
+        testCompile "stax:stax-api:1.0"
+        testCompile "com.netflix.astyanax:astyanax-thrift:1.56.43"
+        testCompile "junit:junit:$junitVersion"
+    }
+}
