@@ -4,11 +4,14 @@ PointsManager - Cassandra / Astyanax
 Overview:
 ---------
 
-   This project provides a sample implementation of Points accruel of a member within loyalty management platform using Cassandra and Astyanax. Scenarios are,
-       1. Member can be awarded points through the system. When a member does shopping at a shop, points get awarded to them based on the type of product they buy. In this case, need to
-          handle storing of points for a member on a particular time and also for which product category they have been awarded with points.
-       2. Member can use the award points for buying things, in which case the points get deducted from member account. The assumption here is that frequency of
-           deducting points are much compared to adding points to the member.
+This project provides a sample implementation of Points accruel of a member within loyalty 
+	management platform using Cassandra and Astyanax. Scenarios are,
+	
+	1. Member can be awarded points through the system. When a member does shopping at a shop, points get awarded 
+	   to them based on the type of product they buy. In this case, need to  handle storing of points for a 
+	   member on a particular time and also for which product category they have been awarded with points.
+	2. Member can use the award points for buying things, in which case the points get deducted from member account. 
+		The assumption here is that frequency of deducting points are much compared to adding points to the member.
 		   
 
 The cassandra Column family structures are below,
