@@ -8,6 +8,7 @@ Overview:
 		   handle storing of points for a member on a particular time and also for which product category they have been awarded with points.
 		2. Member can use the award points for buying things, in which case the points get deducted from member account. The assumption here is that frequency of
 		   deducting points are much compared to adding points to the member.
+		   
 
 The cassandra Column family structures are below,
 
