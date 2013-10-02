@@ -51,6 +51,11 @@ public class PointsManagerServiceImpl implements PointsManagerService {
 		addPointsToMember(memberId, points, productCategory, LocalDateTime.now());
 	}
 
+	@Override
+	public Integer getPointsForMember(String memberId) {
+		return aggregatorService.calculateAggregatedPointsUptoDate(memberId, LocalDateTime.now());
+	}
+	
 
 	@Override
 	public void deductPointsToMember(String memberId, Integer points) {

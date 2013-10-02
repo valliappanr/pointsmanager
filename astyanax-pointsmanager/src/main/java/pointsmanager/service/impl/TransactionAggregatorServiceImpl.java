@@ -28,6 +28,24 @@ public class TransactionAggregatorServiceImpl implements TransactionAggregatorSe
 	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat.forPattern("yyyy-MM-dd");
 	private static final DateTimeFormatter MONTH_YEAR_FORMATTER = DateTimeFormat.forPattern("MM-yyyy");
 	
+	
+	
+	public TransactionDao getTransactionDao() {
+		return transactionDao;
+	}
+
+	public void setTransactionDao(TransactionDao transactionDao) {
+		this.transactionDao = transactionDao;
+	}
+
+	public MonthlyTransactionDao getMonthlyTransactionDao() {
+		return monthlyTransactionDao;
+	}
+
+	public void setMonthlyTransactionDao(MonthlyTransactionDao monthlyTransactionDao) {
+		this.monthlyTransactionDao = monthlyTransactionDao;
+	}
+
 	@Override
 	public Integer calculateAggregatedPointsUptoDate(String memberId, LocalDateTime date) {
 		int pointsTillYesterday = getPointsTillDayBefore(memberId, date);

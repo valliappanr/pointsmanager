@@ -24,4 +24,9 @@ public interface PointsManagerService {
 	 * Service method to calculate the aggregated points for today.
 	 */
 	void aggregatePointsForToday();
+
+	/**
+	 * Service method to calculate the aggregated points for a particular member.
+	 */
+	Integer getPointsForMember(String memberId);
 }
