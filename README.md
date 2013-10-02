@@ -44,9 +44,12 @@ The cassandra Column family structures are below,
 	|------------------------------------------------------------------|
 
 
-	1. transaction column family stores transaction made by each member on a particular day (this includes both accumulating points, and use the points).
-	2. product_category column family stores for the category(food, clothes, electric items) in which member been awarded with points.
-	3. monthly_txn column family stores the accumulated points of a member for specific month. This has to be calculated and updated overnight in a background process from the daily transactions of a member.
+	1. transaction column family stores transaction made by each member on a particular day 
+	   (this includes both accumulating points, and use the points).
+	2. product_category column family stores for the category(food, clothes, electric items) 
+	   in which member been awarded with points.
+	3. monthly_txn column family stores the accumulated points of a member for specific month. 
+	   This has to be calculated and updated overnight in a background process from the daily transactions of a member.
 
 
 Sample Request / Response:
